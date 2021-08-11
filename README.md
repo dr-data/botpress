@@ -22,6 +22,30 @@ There are a few ways to get started with botpress :
   [![DigitalOcean](.github/do_button.svg)](https://marketplace.digitalocean.com/apps/botpress) [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 - Run from sources, follow [build docs](https://botpress.com/docs/infrastructure/deploying)
 
+##Fix the heroku running problem:
+
+Source: https://forum.botpress.com/t/application-error-on-heroku/4836/5
+
+Step 1: changed Dockerfile
+
+
+```
+FROM botpress/server:v12_19_2
+WORKDIR /botpress
+CMD ["/bin/bash", "-c", "./bp"]
+```
+
+Step 2: heroku config:set PGSSLMODE=require --app $APP_NAME
+It can be done by CLI
+
+or 
+
+in the setting of the app: 
+Settings ==> Reveal Config Vars ==> Key: PGSSLMODE, Value: require
+
+Step 3: Restart the dyno
+
+
 ## Documentation
 
 - [Main Documentation](https://botpress.com/docs/introduction)
